@@ -2,9 +2,10 @@
   "name": "news-scraper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -18,12 +19,12 @@
   },
   "homepage": "https://github.com/walidbillel/news-scraper#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.3",
-    "express-handlebars": "^3.0.0",
     "mongoose": "^5.2.14",
-    "path": "^0.12.7",
+    "morgan": "^1.9.1",
     "request": "^2.88.0"
   }
 }
