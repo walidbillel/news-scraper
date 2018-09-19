@@ -7,6 +7,8 @@ function getArticles() {
     $.getJSON("/articles", function (data) {
         console.log(data)
 
+      
+        $("#articles").append("<h2> ARTICLES </h2>" + "<hr>");
         // For each one
         for (var i = 0; i < data.length; i++) {
 
@@ -15,8 +17,8 @@ function getArticles() {
             $("#articles").append("<br>");
 
 
-            $("#articles").append("<p>Summary: " + data[i].summary + "</p>");
-            $("#articles").append("<a>Link: " + data[i].link + "</a>");
+            $("#articles").append("<p><b>Summary:</b> " + data[i].summary + "</p>");
+            $("#articles").append("<a> Link: " + data[i].link + "</a>");
             $("#articles").append("<br><br>");
 
             var btnMakeNote = $("<button>");
@@ -37,7 +39,7 @@ function getArticles() {
             $("#articles").append(btnViewNotes);
             $("#articles").append("<br>");
             $("#articles").append("<br>");
-            $("#articles").append("<br>");
+            $("#articles").append("<hr>");
         }
     });
 }
@@ -62,8 +64,10 @@ $(document).on("click", ".makenote-button", function () {
             $("#notes").append("<input id='titleinput' name='title' >");
             // A textarea to add a new note body
             $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
+
+            $("#notes").append("<br>")
             // A button to submit a new note, with the id of the article saved to it
-            $("#notes").append("<button class='btn btn-primary btn-xs' data-id='" + data._id + "' id='savenote'>Save Note</button>");
+            $("#notes").append("<button class='btn btn-primary btn-xs' data-id='" + data._id + "' id='savenote'>Save</button>");
 
         });
 });
@@ -81,8 +85,8 @@ function viewNotes(ID) {
     // Save the id from the p tag
     var thisId = ID;
     deleteID = ID;
-    console.log(thisId)
-    $("#notes").append("<h2>Article Notes:</h2>");
+
+    $("#notes").append("<h2>Article Notes:</h2>" + "<hr>");
 
     // Now make an ajax call for the Article
     $.ajax({
@@ -95,24 +99,24 @@ function viewNotes(ID) {
 
             if (data.note) {
 
-                
-
-
-                for (var i = 0; i < data.note.length; i++) {
-                    console.log(data.note[i].title);
-                    // $("#notes").append("<h4 class = 'notes'>" + data.note[i].title + "</h4>");
-                    // $("#notes").append("<p class = 'notes'>" + data.note[i].body + "</p>");
-                    // var btnDeleteNote = $("<button>");
-                    // btnDeleteNote.addClass("deletenote-button btn-primary btn-xs");
-                    // btnDeleteNote.css("cursor", "pointer");
-                    // btnDeleteNote.text("Delete Note");
-                    // btnDeleteNote.css("width", "30%");
-                    // btnDeleteNote.css("border-radius", "15px");
-                    // btnDeleteNote.attr("data-id", data.note[i]._id)
-                    // $("#notes").append(btnDeleteNote);
-                    // $("#notes").append("<br>");
-                    // $("#notes").append("<br>");
+              $.get("/notes" , function(noteDb){
+                    for (var i = 0; i < noteDb.length; i++) {
+                 
+                $("#notes").append("<h4 class = 'notes'>" + noteDb[i].title + "</h4>");
+                $("#notes").append("<p class = 'notes'>" + noteDb[i].body + "</p>");
+                var btnDeleteNote = $("<button>");
+                btnDeleteNote.addClass("deletenote-button btn-primary btn-xs");
+                btnDeleteNote.css("cursor", "pointer");
+                btnDeleteNote.text("Delete");
+                btnDeleteNote.css("width", "30%");
+                btnDeleteNote.css("border-radius", "15px");
+                btnDeleteNote.attr("data-id", noteDb[i]._id)
+                $("#notes").append(btnDeleteNote);
+                $("#notes").append("<br>");
+                $("#notes").append("<hr>");
                 }
+              })
+              
             }
 
             if (data.note.length < 1) {

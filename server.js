@@ -124,6 +124,19 @@ app.delete("/notes/:id", function (req, res) {
         });
 });
 
+// app.get("/notes/:id", function (req, res) {
+//     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+//     db.Note.findOne({ _id: req.params.id})
+//         .then(function (dbNote) {
+//             // If we were able to successfully find Articles, send them back to the client
+//             res.json(dbNote);
+//         })
+//         .catch(function (err) {
+//             // If an error occurred, send it to the client
+//             res.json(err);
+//         });
+// });
+
 app.get("/notes", function (req, res) {
     // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
     db.Note.find({})
