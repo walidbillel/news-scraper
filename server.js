@@ -7,7 +7,7 @@ var logger = require("morgan");
 // var path = require("path");
 // var axios = require("axios");
 var request = require("request");
-var PORT = 3000;
+var PORT = 3000 ||  process.env.PORT;
 
 var db = require("./models");
 
@@ -20,9 +20,12 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+var MONGODB_URI = process.env.MONGODB_URI;
+// Connect to the Mongo DB
+mongoose.Promise = Promise;
+//mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI || "mongodb://localhost/New_York_Times_Tec", { useNewUrlParser: true });
 
-
-mongoose.connect("mongodb://localhost/New_York_Times_Tec", { useNewUrlParser: true });
 
 // Scrape 
 app.get("/scrape", function (req, res) {
