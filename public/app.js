@@ -7,7 +7,7 @@ function getArticles() {
     $.getJSON("/articles", function (data) {
         console.log(data)
 
-      
+
         $("#articles").append("<h2> ARTICLES </h2>" + "<hr>");
         // For each one
         for (var i = 0; i < data.length; i++) {
@@ -99,28 +99,30 @@ function viewNotes(ID) {
 
             if (data.note) {
 
-              $.get("/notes" , function(noteDb){
-                    for (var i = 0; i < noteDb.length; i++) {
-                 
-                $("#notes").append("<h4 class = 'notes'>" + noteDb[i].title + "</h4>");
-                $("#notes").append("<p class = 'notes'>" + noteDb[i].body + "</p>");
-                var btnDeleteNote = $("<button>");
-                btnDeleteNote.addClass("deletenote-button btn-primary btn-xs");
-                btnDeleteNote.css("cursor", "pointer");
-                btnDeleteNote.text("Delete");
-                btnDeleteNote.css("width", "30%");
-                btnDeleteNote.css("border-radius", "15px");
-                btnDeleteNote.attr("data-id", noteDb[i]._id)
-                $("#notes").append(btnDeleteNote);
-                $("#notes").append("<br>");
-                $("#notes").append("<hr>");
-                }
-              })
-              
+                // $.get("/notes", function (noteDb) {
+                //     console.log(noteDb)
+                    for (var i = 0; i < data.note.length; i++) {
+
+                        $("#notes").append("<h4 class = 'notes'>" + data.note[i].title + "</h4>");
+                        $("#notes").append("<p class = 'notes'>" + data.note[i].body + "</p>");
+                        var btnDeleteNote = $("<button>");
+                        btnDeleteNote.addClass("deletenote-button btn-primary btn-xs");
+                        btnDeleteNote.css("cursor", "pointer");
+                        btnDeleteNote.text("Delete");
+                        btnDeleteNote.css("width", "30%");
+                        btnDeleteNote.css("border-radius", "15px");
+                        btnDeleteNote.attr("data-id", data.note[i]._id)
+                        $("#notes").append(btnDeleteNote);
+                        $("#notes").append("<br>");
+                        $("#notes").append("<hr>");
+                    }
+                // })
+
             }
 
             if (data.note.length < 1) {
-                $("#notes").append("<h2>There are no notes for this article</h2>");
+                $("#notes").empty();
+                $("#notes").html("<h2>There are no notes for this article</h2>");
             }
 
         });

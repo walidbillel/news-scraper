@@ -3,9 +3,11 @@ body {
 }
 
 .jumbotron {
-    background: rgb(101, 84, 252);
+    background: rgb(82, 82, 245);
     color: rgb(0, 0, 0);
     border-radius: 60px;
+   
+    
 }
 textarea,
 input {
