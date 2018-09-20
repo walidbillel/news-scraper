@@ -3,10 +3,11 @@ body {
 }
 
 .jumbotron {
-    background: rgb(82, 82, 245);
+    background: rgb(248, 218, 133);
     color: rgb(0, 0, 0);
     border-radius: 60px;
-   
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 50px;
     
 }
 textarea,
