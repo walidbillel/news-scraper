@@ -7,7 +7,7 @@ var logger = require("morgan");
 // var path = require("path");
 // var axios = require("axios");
 var request = require("request");
-var PORT = 3000 ||  process.env.PORT;
+var PORT = process.env.PORT || 5000;
 
 var db = require("./models");
 
