@@ -3,9 +3,6 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var cheerio = require("cheerio");
 var logger = require("morgan");
-// var hbs = require('express-handlebars');
-// var path = require("path");
-// var axios = require("axios");
 var request = require("request");
 var PORT = process.env.PORT || 5000;
 
@@ -31,9 +28,9 @@ mongoose.connect(MONGODB_URI || "mongodb://localhost/New_York_Times_Tec", { useN
 app.get("/scrape", function (req, res) {
 
     request("https://www.nytimes.com/section/technology", function (err, response, html) {
-        // console.log("yoooooo", a .title);
+        console.log("yoooooo")
         var $ = cheerio.load(html);
-
+        // console.log(html)
         // res.send(html);
 
         $("ol.story-menu.theme-stream.initial-set").children("li").each(function (i, element) {
@@ -43,7 +40,7 @@ app.get("/scrape", function (req, res) {
             articles.title = headlineMess.split("\n").map(function (a) { return a.trim() })[1]
             articles.summary = $(element).children(".story").children(".story-body").children(".story-link").children(".story-meta").children(".summary").text();
             articles.link = $(element).children(".story").children(".story-body").children(".story-link").attr("href");
-            // console.log(story)
+            console.log(story)
 
             // var headline = $("h2.headline").text();
             // var body = $("p.summary").text();
@@ -52,7 +49,7 @@ app.get("/scrape", function (req, res) {
                     res.status("500");
                 }
             });
-            console.log(articles);
+            // console.log(articles);
 
             // console.log(body);
 
